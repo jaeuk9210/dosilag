@@ -1,0 +1,7 @@
+{
+    "MONGO_DB":"mongodb+srv://filestreamtest:filestreamtest@cluster0.my8ub.mongodb.net/library?retryWrites=true&w=majority",
+    "SECRET_KEY":"rhdrnsdmlcorqkd",
+    "NAVER_API_CLIENT_ID":"aSYmwhHKFjyZqNQuKp9d",
+    "NAVER_API_CLIENT_SECRET":"FFAEsGN4mg",
+    "NATIONAL_LIB_API_KEY":"b3f0dca3584c22a5914546f46d46cb1039230b73077312340ba13763265a1349"
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <title><%= post.title %> | 도시락</title>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container-fluid">
+
+      <div class="breadcrumb-toolbar">
+        <nav aria-label="breadcrumb" style="flex-grow: 1; margin-right:0.5rem;">
+          <ol class="breadcrumb p-1 pl-2 pr-2">
+            <li class="breadcrumb-item"><a href="/">홈</a></li>
+            <li class="breadcrumb-item"><a href="/books">도서목록</a></li>
+            <li class="breadcrumb-item"><a href="/books/<%= post.book.id %>"><%= post.book.title %></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><b><%= post.title %></b></li>
+          </ol>
+        </nav>
+        <a class="btn btn-primary p-1 pl-2 pr-2" href="/books/<%= post.book.id %>" style="margin-bottom: 1rem;">돌아가기</a>
+      </div>
+      
+      <div class="review">
+        <div class="review-left">
+          <h5><b>리뷰</b></h5>
+          <table class="table-sm border-bottom">
+            <thead class="review-head">
+              <th scope="col" style='padding-bottom: 0px;'>제목</th>
+              <th scope="col" style='padding-bottom: 0px;'>작성자</th>
+              <th scope="col" style='padding-bottom: 0px;'>작성일</th>
+              <th scopr="col" style='padding-bottom: 0px;'>최근 수정일</th>
+            </thead>
+            <tbody class="review-body">
+              <tr>
+                <td style='padding-top: 0px;'><b><%= post.title %></b></td>
+                <td style='padding-top: 0px;'><b><%= post.author ? post.author.username : "" %></b></td>
+                <td style='padding-top: 0px;'><b><span data-date="<%= post.createdAt %>"></span></b></td>
+                <td style='padding-top: 0px;'><b><span data-date="<%= post.updatedAt %>"></span></b></td> 
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="post-body p-2" id="review_body"><%= post.body %></div>
+        </div>
+        <div class"review-right">
+          <img src="<%= post.book.cover %>" width="160px">
+          <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
+            <div>
+              <a id="edit-btn" class="btn btn-primary" href="/posts/<%= post._id %>/edit">수정</a>
+            </div>
+            <div>
+              <form action="/posts/<%= post._id %>?_method=delete" method="post" class="d-inline">
+                <a id="delete-btn" class="btn btn-primary" href="javascript:void(0)" onclick="confirm('이 리뷰를 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
+              </form>
+            </div>
+          <% } %>
+
+          <div class="like-group">
+            <% if(isAuthenticated && post.likes.toString().indexOf(currentUser.id) < 0){ %>
+              <form action="/posts/<%= post._id%>/like" method="post" class"d-inline">
+                <button id="like-btn" type="submit"><i class="far fa-thumbs-up"></i></button>
+              </form>
+            <% } else if (isAuthenticated && post.likes.toString().indexOf(currentUser.id) >= 0){ %>
+              <form action="/posts/<%= post._id%>/unlike" method="post" class"d-inline">
+                <button id="unlike-btn" type="submit"><i class="fas fa-thumbs-up"></i></button>
+              </form>
+            <% } %>
+            <% if (!isAuthenticated){ %>
+              <i class="far fa-thumbs-up" style="margin-right: 5px;"></i>
+            <% } %>
+            <%= (post.likes.toString().split(",")[0] != "") ? post.likes.toString().split(",").length : "0" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if(post.attachment) { %>
+      <div class="audio-container fixed-bottom">
+        <audio id="review" src="/files/<%= post.attachment.serverFileName %>/<%= post.attachment.originalFileName %>"></audio>
+        <div class="audio-left">
+          <div class="info">
+            <%= post.author ? post.author.username : "" %> <span style="color: #4d8ab0;"><%= post.title %></span> - <%= post.book.title %>
+          </div>
+          <div class="duration">
+            <span id="now_time" style="color: #8e8e8e;">00:00</span>
+            <input type="range" min="0" max="100" value="0" id="duration_slider" onchange="change_duration()">
+            <span id="total_time" style="color: #8e8e8e;">00:00</span>
+          </div>
+        </div>
+        <div class="audio-right">
+          <button onclick="pre_10s()" id="pre"><span class="material-icons">replay_10</span></i>
+          <button onclick="play()" id="play"><span class="material-icons">
+play_arrow
+</span></button>
+          <button onclick="next_30s()" id="next"><span class="material-icons">forward_30</span></button>
+        </div>
+      </div>
+    <% } %>
+    <script src="/js/playmusic.js"></script>
+  </body>
+</html>

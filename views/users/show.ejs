@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <title><%= user.username %> | 도시락</title>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container-fluid mb-3">
+
+      <h3 class="contentBoxTop"><%= user.username %></h3>
+
+      <form class="user-form" action="/users" method="post">
+        <fieldset disabled>
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">성명</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">이메일</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="text" id="email" name="email" value="<%= user.email %>">
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      
+      <div class="review_list">
+        <h4>리뷰</h4>
+
+        <% if(posts.length){ %> <!-- 1-1 -->
+          <table class="board-table table table-sm border-bottom">
+
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">제목</th>
+              <th scope="col" class="author">작성자</th>
+              <th scope="col" class="date">날짜</th>
+              <th scopr="col" class="like">추천수</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% posts.forEach(function(post) { %>
+              <tr>
+                <td>
+                  <a href="/posts/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
+                </td>
+                <td class="author">
+                  <div class="ellipsis"><%= post.author ? post.author.username : "" %></div>
+                </td>
+                <td class="date">
+                  <span data-date="<%= post.createdAt %>"></span>
+                </td>
+                <td class="like">
+                  <div class="ellipsis"><%= (post.likes.toString().split(",")[0] != "") ? post.likes.toString().split(",").length : "0" %></div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+
+        </table>
+        <% } else { %>
+          등록된 리뷰가 없습니다
+        <% } %>
+      </div>
+
+      <div>
+        <% if(isAuthenticated && currentUser.id == user.id){ %> 
+          <a class="btn btn-primary" href="/users/<%= user.username %>/edit">수정</a>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

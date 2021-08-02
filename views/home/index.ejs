@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <title>도시락</title>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="grid-container">
+      <div class="gallery" id="seoul" style="overflow:auto;">
+        <h5 class="mb-3">서울시 도서관</h5>
+        <div class="seoul">
+          <% if (isNaN(seoul)) { %>
+            <% seoul.forEach(function(book) { %>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books/<%= book._id%>';">
+                  <img class="card-img-top" src="<%= book.cover %>">
+                  <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                    <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
+                  </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>등록된 도서가 없습니다.</p>
+          <% } %>
+          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+              <a><h7 class="card-title ellipsis">더보기</h7></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery" id="gimcheon">
+        <h5 class="mb-3">김천시 도서관</h5>
+        <div class="gimcheon">
+          <% if (isNaN(gimcheon)) { %>
+            <% gimcheon.forEach(function(book) { %>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books/<%= book._id%>';">
+                  <img class="card-img-top" src="<%= book.cover %>">
+                  <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                    <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
+                  </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>등록된 도서가 없습니다.</p>
+          <% } %>
+          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+              <a><h7 class="card-title ellipsis">더보기</h7></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery" id="dodLib">
+        <h5 class="mb-3">내 서재</h5>
+        <div class="dodLib">
+          <% if (isNaN(post)) { %>
+            <% post.forEach(function(post) { %>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books/<%= post.book._id%>';">
+                <img class="card-img-top" src="<%= post.book.cover %>">
+                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                  <a><h7 class="card-title ellipsis"><%= post.book.title %></h7></a>
+                </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>등록된 도서가 없습니다.</p>
+          <% } %>
+          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+              <a><h7 class="card-title ellipsis">더보기</h7></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery" id="reviewRank" height="585.5px">
+        <h4>독후감 순위</h4>
+        <% rank.forEach((book, i) => { %>
+          <div class="review-rank">
+            <div class="book-left" style="cursor:pointer;" onclick="location.href='/books/<%= book.books[0]._id%>';">
+              <img src="<%= book.books[0].cover %>" style="width: 10rem; height: 245px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+            </div>
+            <div class="book-right" style="margin: 0.5rem;">
+              <h5 style="cursor:pointer;" onclick="location.href='/books/<%= book.books[0]._id%>';"><b><%= i + 1 %>위 <%= book.books[0].title %></b></h5>
+              <% book.reviews_title.forEach((post, i, arr) => { %>
+                <div><a href="/posts/<%= book.reviews_id[i] %>"><%= post %></a></div>
+                <% if(i >= 6) {arr.length = i + 1}%>
+              <% }) %>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+      <div class="gallery" id="mylib" height="585.5px">
+        <h4>내 서재</h4>
+        <% if (isNaN(post)) { %>
+          <div class="mylib">
+            <% post.forEach(function(post) { %>
+              <div class="card m-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books/<%= post.book._id%>';">
+                  <img class="card-img-top" src="<%= post.book.cover %>">
+                  <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                    <a><h7 class="card-title ellipsis"><%= post.book.title %></h7></a>
+                  </div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p>등록한 리뷰가 없습니다.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,366 @@
+body {
+  background: #e2e2e2;
+}
+.review-head {
+  font-size: 0.8rem;
+  color: #777;
+}
+.review-body {
+  color: #5f5f5f;
+}
+.audio-container{
+  display: flex;
+  padding: 1rem;
+  background-color: #e2e2e2;
+  box-shadow: 0px 0px 20px 0px gray;
+}
+
+.fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.book-list {
+  padding: 16px;
+  background-color: #f2f2f2;
+  border-radius: 20px;
+}
+
+.post-body {
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.material-icons {
+  color: #8e8e8e;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2rem;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+a{
+  color: #5f5f5f;
+}
+
+a:hover{
+  color: #5f5f5f;
+  text-decoration: none;
+}
+
+.book-detail{
+  display: flex;
+}
+
+.review{
+  margin-top: 0.5rem;
+  background-color: #f5f5f5;
+  background-clip: border-box;
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+}
+
+.review-right{
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.review-left{
+  flex-grow: 1;
+}
+
+.review-rank{
+  background: #eee;
+  display: flex;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+.book-left{
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.book-right{
+  flex-grow: 1;
+}
+
+.audio-left{
+  flex-grow: 1;
+}
+
+.audio-right{
+  display: flex;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.bookinfo{
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #f2f2f2;
+  background-clip: border-box;
+  border-radius: 20px;
+}
+
+.review_list{
+  margin-top: 0.5rem;
+  background-color: #f2f2f2;
+  background-clip: border-box;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.breadcrumb-toolbar {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  justify-content: space-between;
+}
+
+.btn{
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: .25rem .5rem;
+}
+
+.btn-primary {
+    color: #d6d6d6;
+    background-color: #5f5f5f;
+    border-color: #5f5f5f;
+}
+
+.btn-primary:hover {
+    color: #d6d6d6;
+    background-color: #5f5f5f;
+    border-color: #5f5f5f;
+}
+
+.breadcrumb {
+  width: 100%;
+  background-color: #d6d6d6;
+  border-radius: 5px;
+}
+.duration{
+  display: flex;
+}
+
+.like-group{
+  display: flex;
+  align-items: center;
+}
+
+#duration_slider{
+  margin: 0 5px;
+  width: 100%;
+}
+
+#edit-btn, #delete-btn{
+  width: 100%;
+  margin: 0.3rem 0;
+  border-radius: 20px;
+}
+
+#like-btn, #unlike-btn{
+  background-color: transparent;
+  border: 0px transparent solid;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+#pre, #play, #next{
+  cursor: pointer;
+  background-color: transparent;
+  border: 0px transparent solid;
+  font-size: 1.5rem
+}
+
+.border-bottom {
+  border-bottom: 2px solid #e2e2e2!important;
+}
+
+.breadcrumb-item.active {
+  color: #5f5f5f;
+}
+
+.navbar {
+  background-color: #e2e2e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 20px 0px gray;
+}
+
+.search-box{
+  display: flex;
+  background: #d6d6d6;
+  height: 35px;
+  width: 145px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.search-btn{
+  font-family: FontAwesome;
+  color: #5f5f5f;
+  width: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  color: #5f5f5f;
+  text-decoration: none;
+}
+
+.search-txt{
+  width: 100px;
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  font-size: 16px;
+  color: #5f5f5f;
+  transition: 0.4s;
+}
+
+.post-index-tool {
+  max-width: 450px;
+}
+.post-index-tool input[type='text']{
+  max-width: 130px;
+}
+
+.gallery{
+  padding: 1.5rem;
+}
+
+.grid-container {
+  margin: 2rem;
+  display: grid;
+  grid-gap: 40px;
+  grid-template-areas:  'seoul reviewRank'
+                        'seoul reviewRank'
+                        'gimcheon reviewRank'
+                        'gimcheon mylib'
+                        'dodLib mylib'
+                        'dodLib mylib';
+}
+
+#seoul {
+  background-color: #f2f2f2;
+  grid-area: seoul;
+  border-radius: 20px;
+}
+
+#gimcheon {
+  background-color: #f2f2f2;
+  grid-area: gimcheon;
+  border-radius: 20px;
+}
+
+#dodLib {
+  background-color: #f2f2f2;
+  grid-area: dodLib;
+  border-radius: 20px;
+}
+
+.seoul, .gimcheon, .dodLib{
+  display: flex;
+  gap: 1rem;
+}
+
+.home-card{
+  height: 285px;
+  border-radius: 5px;
+  width: 170px;
+  margin-right: 10px;
+}
+
+.home-card img{
+  height: 245px;
+}
+
+#reviewRank {
+  width: 100%;
+  height: 585.5px;
+  background-color: #f2f2f2;
+  grid-area: reviewRank;
+  border-radius: 20px;
+  overflow: auto;
+}
+
+#mylib {
+  width: 100%;
+  height: 585.5px;
+  background-color: #f2f2f2;
+  grid-area: mylib;
+  border-radius: 20px;
+  overflow: auto;
+}
+
+.mylib{
+  flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .grid-container {
+    grid-template-areas:  'seoul'
+                          'gimcheon'
+                          'dodLib'
+                          'reviewRank'
+                          'mylib';
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    grid-gap: 8px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .grid-container {
+    grid-template-areas:  'seoul'
+                          'gimcheon'
+                          'dodLib'
+                          'reviewRank'
+                          'mylib';
+    grid-template-columns: 1fr;
+    justify-items: center;
+    grid-gap: 8px;
+  }
+}
+
+.like img {cursor: pointer;}
