@@ -10,6 +10,15 @@
     <div class="container-fluid mb-3">
 
       <h3 class="contentBoxTop"><%= user.username %></h3>
+      <% if(user.profileImg) { %>
+        <div class="profileBox">
+          <img class="profile" src="/imgs/<%= user.profileImg %>">
+        </div>
+      <% } else { %>
+        <div class="profileBox">
+          <img class="profile" src="/imgs/noprofile">
+        </div>
+      <% }%>
 
       <form class="user-form" action="/users" method="post">
         <fieldset disabled>

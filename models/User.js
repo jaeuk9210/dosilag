@@ -36,6 +36,11 @@ var userSchema = mongoose.Schema({
     default:"User",
     enum:['Admin', 'User']
   }
+  ,
+  profileImg:{
+    type:String,
+    default:"noprofile"
+  }
 },{
   toObject:{virtuals:true}
 , versionKey : false});

@@ -19,15 +19,15 @@
                     <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
                   </div>
               </div>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                  <a><h7 class="card-title ellipsis">더보기</h7></a>
+                </div>
+              </div>
             <% }) %>
           <% } else { %>
             <p>등록된 도서가 없습니다.</p>
           <% } %>
-          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
-            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-              <a><h7 class="card-title ellipsis">더보기</h7></a>
-            </div>
-          </div>
         </div>
       </div>
       <div class="gallery" id="gimcheon">
@@ -41,15 +41,15 @@
                     <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
                   </div>
               </div>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                  <a><h7 class="card-title ellipsis">더보기</h7></a>
+                </div>
+              </div>
             <% }) %>
           <% } else { %>
             <p>등록된 도서가 없습니다.</p>
           <% } %>
-          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
-            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-              <a><h7 class="card-title ellipsis">더보기</h7></a>
-            </div>
-          </div>
         </div>
       </div>
       <div class="gallery" id="dodLib">
@@ -63,50 +63,102 @@
                   <a><h7 class="card-title ellipsis"><%= post.book.title %></h7></a>
                 </div>
               </div>
+              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                  <a><h7 class="card-title ellipsis">더보기</h7></a>
+                </div>
+              </div>
             <% }) %>
           <% } else { %>
             <p>등록된 도서가 없습니다.</p>
           <% } %>
-          <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
-            <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-              <a><h7 class="card-title ellipsis">더보기</h7></a>
-            </div>
-          </div>
         </div>
       </div>
       <div class="gallery" id="reviewRank" height="585.5px">
-        <h4>독후감 순위</h4>
-        <% rank.forEach((book, i) => { %>
-          <div class="review-rank">
-            <div class="book-left" style="cursor:pointer;" onclick="location.href='/books/<%= book.books[0]._id%>';">
-              <img src="<%= book.books[0].cover %>" style="width: 10rem; height: 245px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
-            </div>
-            <div class="book-right" style="margin: 0.5rem;">
-              <h5 style="cursor:pointer;" onclick="location.href='/books/<%= book.books[0]._id%>';"><b><%= i + 1 %>위 <%= book.books[0].title %></b></h5>
-              <% book.reviews_title.forEach((post, i, arr) => { %>
-                <div><a href="/posts/<%= book.reviews_id[i] %>"><%= post %></a></div>
-                <% if(i >= 6) {arr.length = i + 1}%>
-              <% }) %>
-            </div>
-          </div>
-        <% }) %>
+        <h4>추천 BJ</h4>
+        <ul class="contents-list user">
+          <% rank.forEach(function(user) { %>
+            <li class="list-item">
+              <div class="user-list-item-container home">
+                <div class="mainProfileBox">
+                  <% if(user.users[0].profileImg) { %>
+                    <a title="<%= user.users[0].username %>" class="" href="/users/<%= user.users[0].username%>" style="background-image: url('/imgs/<%= user.users[0].profileImg %>');"></a>
+                  <% } else { %>
+                    <a title="<%= user.users[0].username %>" class="" href="/users/<%= user.users[0].username%>" style="background-image: url('/imgs/noprofile');"></a>
+                  <% } %>
+                </div> 
+                <div class="detail-wrap">
+                  <div class="name-wrap">
+                    <a title="<%= user.users[0].username %>" class href="/users/<%= user.users[0].username%>">
+                      <p class="name text-box"><%= user.users[0].username %></p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
       </div>
       <div class="gallery" id="mylib" height="585.5px">
-        <h4>내 서재</h4>
-        <% if (isNaN(post)) { %>
-          <div class="mylib">
-            <% post.forEach(function(post) { %>
-              <div class="card m-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books/<%= post.book._id%>';">
-                  <img class="card-img-top" src="<%= post.book.cover %>">
-                  <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-                    <a><h7 class="card-title ellipsis"><%= post.book.title %></h7></a>
+        <div>
+          <h4>내가 선택한 BJ</h4>
+          <% if (isNaN(myChoice)) { %>
+            <ul class="contents-list user">
+              <% myChoice.forEach(function(user) { %>
+                <li class="list-item">
+                  <div class="user-list-item-container home">
+                    <div class="mainProfileBox">
+                      <% if(user.users[0].profileImg) { %>
+                        <a title="<%= user.users[0].username %>" class="" href="/users/<%= user.users[0].username%>" style="background-image: url('/imgs/<%= user.users[0].profileImg %>');"></a>
+                      <% } else { %>
+                        <a title="<%= user.users[0].username %>" class="" href="/users/<%= user.users[0].username%>" style="background-image: url('/imgs/noprofile');"></a>
+                      <% } %>
+                    </div> 
+                    <div class="detail-wrap">
+                      <div class="name-wrap">
+                        <a title="<%= user.users[0].username %>" class href="/users/<%= user.users[0].username%>">
+                          <p class="name text-box"><%= user.users[0].username %></p>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-              </div>
-            <% }) %>
-          </div>
-        <% } else { %>
-          <p>등록한 리뷰가 없습니다.</p>
-        <% } %>
+                </li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p>좋아요한 BJ가 없습니다.</p>
+          <% } %>
+        </div>
+        <div>
+          <h4>내가 좋아요한 리뷰</h4>
+          <% if (isNaN(likeReview)) { %>
+            <table class="board-table table table-sm border-bottom">
+
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">제목</th>
+                  <th scope="col" class="author">작성자</th>
+                </tr>
+              </thead>
+    
+              <tbody>
+                <% likeReview.forEach(function(post) { %>
+                  <tr>
+                    <td>
+                      <a href="/posts/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
+                    </td>
+                    <td class="author">
+                      <div class="ellipsis"><%= post.author ? post.author.username : "" %></div>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+  
+            </table>
+          <% } else { %>
+            <p>좋아요한 리뷰가 없습니다.</p>
+          <% } %>
+        </div>
       </div>
     </div>
   </body>

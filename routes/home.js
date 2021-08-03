@@ -4,47 +4,65 @@ var Book = require('../models/Book');
 var Post = require('../models/Post');
 var passport = require('../config/passport');
 var util = require('../util');
+const Mongoose  = require('mongoose');
+const ObjectID = Mongoose.Types.ObjectId;
 
 router.get('/', async function(req, res) {
-	//진중문고 5개 랜덤 추출
-	var seoul = await divisionBook('서울시');
-	//국방전자도서관 5개 랜덤 추출
-	var gimcheon = await divisionBook('김천시');
+  //진중문고 5개 랜덤 추출
+  var seoul = await divisionBook('서울시');
+  //국방전자도서관 5개 랜덤 추출
+  var gimcheon = await divisionBook('김천시');
 
   var rank = await Post.aggregate([
     {
       $group : {
-        _id: "$book",
-        num_post : {$sum:1},
+        _id: "$author",
+        num_like : {$sum:{ $size: "$likes" }},
         reviews_title : {$push : "$title"},
         reviews_id : {$push : "$_id"}
       }
     },
     {
-      $sort : {num_post :-1}
+      $sort : {num_like :-1}
     },
     { $limit: 3 },
     {
       $lookup : {
-        "from": "books",
+        "from": "users",
         "localField": "_id",
         "foreignField": "_id",
-        "as": "books"
+        "as": "users"
       }
     }
   ]);
 
-	var review=[];
+	var review = [];
+  var myChoice = [];
+  var likeReview = [];
 	if (req.isAuthenticated()) {
     Promise.all([
-      Post.find({ author: req.user.id }).populate('book')
+      Post.find({ author: req.user.id }).populate('book'),
+      Post.find({ likes: req.user.id }).populate('author'),
+      Post.aggregate([
+        { $unwind : { path: "$likes", preserveNullAndEmptyArrays: true } },
+        { $match : { likes: new ObjectID(req.user.id) } },
+        { $group : {_id: "$author"} },
+        { $lookup : {
+          "from": "users",
+          "localField": "_id",
+          "foreignField": "_id",
+          "as": "users"
+        } }
+      ])
     ])
-    .then(([review]) => {
+    .then(([review, likeReview, myChoice]) => {
       res.render('home/index', {
         seoul: seoul,
         gimcheon: gimcheon,
         rank: rank,
-        post: review
+        post: review,
+        myChoice: myChoice,
+        likeReview: likeReview
       });
     })
     .catch((err) => {
@@ -56,7 +74,9 @@ router.get('/', async function(req, res) {
       seoul: seoul,
       gimcheon: gimcheon,
       rank: rank,
-      post: review
+      post: review,
+      myChoice: myChoice,
+      likeReview: likeReview
     });
   }
 });

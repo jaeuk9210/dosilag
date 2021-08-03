@@ -1,8 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/User');
-var util = require('../util');
-var Post = require('../models/Post')
+const express = require('express');
+const router = express.Router();
+const multer = require('multer');
+const upload = multer({dest: 'uploadedProfileImg'});
+const User = require('../models/User');
+const util = require('../util');
+const Post = require('../models/Post');
 
 router.get('/new', function(req, res) {
   var user = req.flash('user')[0] || {};
@@ -10,7 +12,8 @@ router.get('/new', function(req, res) {
   res.render('users/new', { user: user, errors: errors });
 });
 
-router.post('/', function(req, res) {
+router.post('/', upload.single('proflieImg'), async function(req, res) {
+  req.body.profileImg = req.file.filename;
   User.create(req.body, function(err, user) {
     if (err) {
       req.flash('user', req.body);
@@ -54,7 +57,7 @@ router.get('/:username/edit', util.isLoggedin, checkPermission, function(req, re
   }
 });
 
-router.put('/:username', util.isLoggedin, checkPermission, function(req, res, next) {
+router.put('/:username', util.isLoggedin, checkPermission, upload.single('newprofileImg'), async function(req, res, next) {
   User.findOne({ username: req.params.username })
     .select('password')
     .exec(function(err, user) {
@@ -66,6 +69,8 @@ router.put('/:username', util.isLoggedin, checkPermission, function(req, res, ne
         user[p] = req.body[p];
       }
 
+      user.profileImg = req.file.filename;
+      
       user.save(function(err, user) {
         if (err) {
           req.flash('user', req.body);

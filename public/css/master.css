@@ -1,6 +1,29 @@
 body {
   background: #e2e2e2;
 }
+
+li, ol, ul {
+  padding-inline-start: 0px;
+  list-style: none;
+}
+
+.detail-wrap{
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.name-warp{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-box{
+  text-align: center;
+}
+
 .review-head {
   font-size: 0.8rem;
   color: #777;
@@ -105,6 +128,57 @@ a:hover{
 
 .book-right{
   flex-grow: 1;
+}
+
+.contents-list {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.user-list-item-container.home{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  position: relative;
+  align-items: flex-start;
+}
+
+.list-item{
+  margin-left: 38px;
+}
+
+.mainProfileBox {
+  box-sizing: border-box;
+  width: 150px;
+  height: 150px;
+  border-radius: 70%;
+  overflow: hidden;
+  background-size: 150px 150px;
+}
+
+.mainProfileBox a{
+  display: block;
+  flex: 1 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+}
+
+.profileBox {
+  width: 150px;
+  height: 150px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .audio-left{
