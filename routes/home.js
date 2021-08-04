@@ -9,10 +9,10 @@ const ObjectID = Mongoose.Types.ObjectId;
 
 router.get('/', async function(req, res) {
   //진중문고 5개 랜덤 추출
-  var seoul = await divisionBook('서울시');
+  var seoul = await divisionBook('인기 대출 도서');
   //국방전자도서관 5개 랜덤 추출
-  var gimcheon = await divisionBook('김천시');
-
+  var gimcheon = await divisionBook('베스트 셀러');
+  
   var rank = await Post.aggregate([
     {
       $group : {
@@ -132,9 +132,11 @@ async function divisionBook(type) {
 			if (err) {
 				req.flash('Error', { _id: null, errors: util.parseError(err) });
 			} else {
+        console.log(result);
 				book = result;
 			}
 		}
 	);
+  console.log(book);
 	return book;
 }

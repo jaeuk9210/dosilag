@@ -226,6 +226,8 @@ module.exports = router;
 
 function createSearchQuery(queries){ // 4
   var searchQuery = {};
+  var postQueries = [];
+  postQueries.push({ type: "도서"});
   if(queries.searchText && queries.searchText.length >= 2 || queries.kdc){
     
     if(queries.searchType){
@@ -233,8 +235,7 @@ function createSearchQuery(queries){ // 4
     } else if (queries.searchText) {
       var searchTypes = "title";
     }
-    var postQueries = [];
-
+    
     var kdc = queries.kdc;
     if(!isNaN(kdc) && parseInt(kdc)>=100) {
       kdc = kdc.split("0").join("[0-9]");
@@ -259,6 +260,8 @@ function createSearchQuery(queries){ // 4
     if(queries.kdc){
       postQueries.push({ kdc: kdcquery });
     }
+
+
     if(postQueries.length > 0) searchQuery = {$or:postQueries};
   }
   return searchQuery;

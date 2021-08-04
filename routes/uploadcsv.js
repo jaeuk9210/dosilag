@@ -23,7 +23,7 @@ router.post('/', util.isLoggedin, upload.single('attachment'), async function(re
         if (err) throw err;
 
         client
-          .db("myFirstDatabase")
+          .db("library")
           .collection("books")
           .insertMany(csvData, (err, res) => {
             if (err) throw err;

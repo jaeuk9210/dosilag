@@ -9,7 +9,7 @@
 
     <div class="grid-container">
       <div class="gallery" id="seoul" style="overflow:auto;">
-        <h5 class="mb-3">서울시 도서관</h5>
+        <h5 class="mb-3">인기 대출 도서</h5>
         <div class="seoul">
           <% if (isNaN(seoul)) { %>
             <% seoul.forEach(function(book) { %>
@@ -19,19 +19,19 @@
                     <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
                   </div>
               </div>
-              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
-                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-                  <a><h7 class="card-title ellipsis">더보기</h7></a>
-                </div>
-              </div>
             <% }) %>
+            <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+              <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                <a><h7 class="card-title ellipsis">더보기</h7></a>
+              </div>
+            </div>
           <% } else { %>
             <p>등록된 도서가 없습니다.</p>
           <% } %>
         </div>
       </div>
       <div class="gallery" id="gimcheon">
-        <h5 class="mb-3">김천시 도서관</h5>
+        <h5 class="mb-3">배스트 셀러</h5>
         <div class="gimcheon">
           <% if (isNaN(gimcheon)) { %>
             <% gimcheon.forEach(function(book) { %>
@@ -41,12 +41,12 @@
                     <a><h7 class="card-title ellipsis"><%= book.title %></h7></a>
                   </div>
               </div>
-              <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
-                <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
-                  <a><h7 class="card-title ellipsis">더보기</h7></a>
-                </div>
-              </div>
             <% }) %>
+            <div class="card mb-1 home-card" style="width: 10rem; cursor:pointer;" onclick="location.href='/books';">
+              <div class="card-body p-2" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap">
+                <a><h7 class="card-title ellipsis">더보기</h7></a>
+              </div>
+            </div>
           <% } else { %>
             <p>등록된 도서가 없습니다.</p>
           <% } %>
