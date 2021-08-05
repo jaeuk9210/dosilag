@@ -25,7 +25,7 @@ router.get('/', async function(req, res){
   var kdc = !isNaN(req.query.kdc)?req.query.kdc:"";
 
   var searchQuery = createSearchQuery(req.query);
-  
+  console.log(searchQuery);
   //DB검색 후 출력
   
   var skip = (page - 1) * limit;
@@ -111,7 +111,6 @@ router.get('/:id', async function(req, res){
       var isbn = "";
       var result = xml2js.xml2json(body, {compact: true, spaces: 4});
       
-      //console.log(result);
 
       result = JSON.parse(result);
       
@@ -162,7 +161,6 @@ router.get('/:id', async function(req, res){
       request(nl_options, async function(err, response, body) {
         if(response.statusCode == 200) {
           body = body.replace(/\&/g,'');
-          console.log(body);
           var nl_result = xml2js.xml2json(body, {compact: true, spaces: 4});
 
           nl_result = JSON.parse(nl_result);
@@ -261,8 +259,7 @@ function createSearchQuery(queries){ // 4
       postQueries.push({ kdc: kdcquery });
     }
 
-
-    if(postQueries.length > 0) searchQuery = {$or:postQueries};
+    if(postQueries.length > 0) searchQuery = {$and:postQueries};
   }
   return searchQuery;
 }

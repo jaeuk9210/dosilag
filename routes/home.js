@@ -132,11 +132,9 @@ async function divisionBook(type) {
 			if (err) {
 				req.flash('Error', { _id: null, errors: util.parseError(err) });
 			} else {
-        console.log(result);
 				book = result;
 			}
 		}
 	);
-  console.log(book);
 	return book;
 }
