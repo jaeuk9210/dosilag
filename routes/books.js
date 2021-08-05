@@ -225,13 +225,21 @@ module.exports = router;
 function createSearchQuery(queries){ // 4
   var searchQuery = {};
   var postQueries = [];
-  postQueries.push({ type: "도서"});
-  if(queries.searchText && queries.searchText.length >= 2 || queries.kdc){
+  console.log(queries.type);
+  if(queries.searchText && queries.searchText.length >= 2 || queries.kdc || queries.type){
     
     if(queries.searchType){
       var searchTypes = queries.searchType.toLowerCase().split(',');
     } else if (queries.searchText) {
       var searchTypes = "title";
+    }
+    
+    if(queries.type === "인기") {
+      var typequery = "인기 대출 도서";
+    } else if (queries.type === "베스트") {
+      var typequery = "베스트 셀러"
+    } else {
+      var typequery = "도서"
     }
     
     var kdc = queries.kdc;
@@ -258,6 +266,8 @@ function createSearchQuery(queries){ // 4
     if(queries.kdc){
       postQueries.push({ kdc: kdcquery });
     }
+
+    postQueries.push({type: typequery});
 
     if(postQueries.length > 0) searchQuery = {$and:postQueries};
   }

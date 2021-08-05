@@ -58,12 +58,14 @@ util.getPostQueryString = function(req, res, next){
     var searchType = overwrites.searchType?overwrites.searchType:(req.query.searchType?req.query.searchType:''); // 1
     var searchText = overwrites.searchText?overwrites.searchText:(req.query.searchText?req.query.searchText:''); // 1
     var kdc = overwrites.kdc?overwrites.kdc:(req.query.kdc?req.query.kdc:'');
+    var type = overwrites.type?overwrites.type:(req.query.type?req.query.type:'');
 
     if(page) queryArray.push('page='+page);
     if(limit) queryArray.push('limit='+limit);
     if(searchType) queryArray.push('searchType='+searchType);
     if(searchText) queryArray.push('searchText='+searchText);
     if(kdc) queryArray.push('kdc='+kdc);
+    if(type) queryArray.push('type='+type);
 
     if(queryArray.length>0) queryString = (isAppended?'&':'?') + queryArray.join('&');
     //console.log(queryString)
